@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  android:layout_width="fill_parent"
+  android:layout_height="fill_parent"
+  android:orientation="vertical"
+  android:gravity="center_vertical">
+    <TextView 
+    android:layout_width="fill_parent" 
+    android:layout_height="wrap_content" 
+    android:id="@+id/textView1" android:text="Let's Do It..."
+    android:gravity="center_horizontal"
+    android:paddingBottom="10dip"></TextView>
+    <Button android:text="Linear Layout Activity" 
+    android:id="@+id/linear_layout_button" 
+    android:layout_width="fill_parent" 
+    android:layout_height="wrap_content"></Button>
+    <Button android:text="2D Graphics Activity" 
+    	android:id="@+id/some_graphics" 
+    	android:layout_width="fill_parent" android:layout_height="wrap_content"></Button>
+    <Button android:text="Lots of Views" android:id="@+id/lots_views" android:layout_width="fill_parent" android:layout_height="wrap_content"></Button>
+</LinearLayout>
