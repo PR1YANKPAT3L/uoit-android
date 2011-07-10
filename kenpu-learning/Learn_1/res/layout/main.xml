@@ -19,4 +19,5 @@
     	android:id="@+id/some_graphics" 
     	android:layout_width="fill_parent" android:layout_height="wrap_content"></Button>
     <Button android:text="Lots of Views" android:id="@+id/lots_views" android:layout_width="fill_parent" android:layout_height="wrap_content"></Button>
+    <Button android:text="Camera" android:id="@+id/camera" android:layout_width="fill_parent" android:layout_height="wrap_content"></Button>
 </LinearLayout>

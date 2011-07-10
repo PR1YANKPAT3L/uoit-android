@@ -1,6 +1,7 @@
 package ken.pu.learn1;
 
 import ken.pu.learn2.LotsOfViews;
+import ken.pu.learn3.CameraActivity;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -25,6 +26,8 @@ public class MainActivity extends Activity implements OnClickListener {
         	someGraphics.setOnClickListener(this);
         if(this.findViewById(R.id.lots_views) != null)
         	((Button)this.findViewById(R.id.lots_views)).setOnClickListener(this);
+        if(this.findViewById(R.id.camera) != null)
+        	((Button)this.findViewById(R.id.camera)).setOnClickListener(this);
     }
     
 	@Override
@@ -37,6 +40,8 @@ public class MainActivity extends Activity implements OnClickListener {
 			startActivity(new Intent(this, SomeGraphics.class));
 		} else if(v.getId() == R.id.lots_views) {
 			startActivity(new Intent(this, LotsOfViews.class));
+		} else if(v.getId() == R.id.camera) {
+			startActivity(new Intent(this, CameraActivity.class));
 		}
 	}
 }
