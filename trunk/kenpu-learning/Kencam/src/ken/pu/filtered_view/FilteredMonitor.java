@@ -19,6 +19,7 @@ public class FilteredMonitor extends View implements Camera.PreviewCallback {
 	int cameraHeight;
 	int pixels[];
 	Matrix matrix;
+	public int alphaMask = 0xaa000000;
 	
 	public FilteredMonitor(Context context) {
 		super(context);
@@ -36,6 +37,7 @@ public class FilteredMonitor extends View implements Camera.PreviewCallback {
 		this.matrix.postRotate(90, this.width/2.0f, this.height/2.0f);
 		
 	}
+	
 	
 	@Override
 	protected void onMeasure(int w, int h) {
@@ -61,7 +63,7 @@ public class FilteredMonitor extends View implements Camera.PreviewCallback {
 			int b = (pixels[i] & 0xff);
 //			int x = (r > g) ? r : ((g > b) ? g : b); // Take the maximum of (R, G, B)
 			int x = g;
-			pixels[i] = 0xff000000 | (x << 16) | (x << 8) | x;
+			pixels[i] = this.alphaMask | (x << 16) | (x << 8) | x;
 		}
 		FilteredView.bitmap.setPixels(pixels, 0, w, 0, 0, w, h);
 		this.invalidate();
