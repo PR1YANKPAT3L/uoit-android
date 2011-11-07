@@ -1,16 +1,21 @@
 package ca.uoit.kenpu;
 
 import java.util.List;
+import java.util.Vector;
 
 import android.graphics.PointF;
 
 public class World {
+	public static final float dt = 0.1f;
 	public List<Particle> particles;
+	public List<Spring> springs;
 	public PointF size;
 	
 	public World() {
 		int n = 10;
-		size = new PointF(600, 400);
+		size = new PointF(800, 600);
+		particles = new Vector<Particle>();
+		springs = new Vector<Spring>();
 		float k = 1;
 		float l = size.y/n;
 		float r = 5;
@@ -27,13 +32,23 @@ public class World {
 				Particle p1 = grid[i][j];
 				Particle p2 = grid[i+1][j];
 				Particle p3 = grid[i][j+1];
-				Spring s1 = new Spring(k, l);
-				Spring s2 = new Spring(k, l);
-				s1.connect(p1, p2);
-				s2.connect(p1, p3);
+				Spring s1 = new Spring(k, l).connect(p1, p2);
+				Spring s2 = new Spring(k, l).connect(p1, p3);
+				springs.add(s1);
+				springs.add(s2);
 			}
-		(new Spring(k,l)).connect(grid[n-1][n-1], grid[n-1][n-2]);
-		(new Spring(k,l)).connect(grid[n-1][n-1], grid[n-2][n-2]);
+		springs.add(new Spring(k,l).connect(grid[n-1][n-1], grid[n-1][n-2]));
+		springs.add(new Spring(k,l).connect(grid[n-1][n-1], grid[n-2][n-2]));
 	}
 	
+	public void step(int iteration) throws SimulationException {
+		for(int i=0; i < iteration; i++) {
+			// Compute the new positions
+			for(Particle x : particles) x.next();
+			// Update the current positions
+			for(Particle x : particles) x.update();
+			// Update the spring forces
+			for(Spring s : springs) s.update();
+		}
+	}
 }
