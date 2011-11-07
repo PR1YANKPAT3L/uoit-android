@@ -2,11 +2,19 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:orientation="vertical" >
+    android:orientation="vertical"
+    android:gravity="center">
 
-    <TextView
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/hello" />
+   <LinearLayout
+       android:id="@+id/container"
+       android:layout_width="800px"
+       android:layout_height="600px"
+       android:background="@drawable/container_background">
+   		<ca.uoit.kenpu.CanvasView
+   		    android:id="@+id/canvas"
+   		    android:layout_width="fill_parent"
+   		    android:layout_height="fill_parent">
+   		</ca.uoit.kenpu.CanvasView>
+   </LinearLayout>
 
 </LinearLayout>
