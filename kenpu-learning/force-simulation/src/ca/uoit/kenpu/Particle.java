@@ -15,10 +15,12 @@ public class Particle {
 	public PointF pn; // next position
 	public List<Spring> conn; // Spring connections
 	public boolean fixed = false;
+	public boolean hold = false;
 	public float r;
+	private float dt = ForceSimulationController.dt;
+
 	
 	public Particle(float m, float r, PointF p0, PointF v0) {
-		float dt = World.dt;
 		this.pp = new PointF(p0.x, p0.y);
 		this.p = new PointF(p0.x + v0.x*dt, p0.y + v0.y*dt);
 		this.pn = new PointF(0,0);
@@ -29,20 +31,28 @@ public class Particle {
 		this.id = (Particle.ID ++);
 	}
 	
+	public Particle(float m, float r) {
+		this(m, r, new PointF(0,0), new PointF(0,0));
+	}
+	
+	public void set(float x, float y) {
+		this.p.set(x, y);
+	}
+	
 	/**
 	 * Uses Verlet integral
 	 * pn = 2*p - pp + a*dt*dt
 	 */
 	public void next() throws SimulationException {
 		pn.set(p);
-		if(this.fixed)
+		if(this.fixed || this.hold)
 			return;
 		
 		Subtract(Multiply(pn, 2), pp);
 		PointF accel = new PointF(0, 0);
 		for(Spring s: conn)
 			Add(accel, s.forceOn(this));
-		Multiply(accel, this.m_inverse * World.dt * World.dt);
+		Multiply(accel, this.m_inverse * dt * dt);
 		Add(pn, accel);
 	}
 	
@@ -50,8 +60,8 @@ public class Particle {
 	 * Update current position and previous position
 	 */
 	public void update() {
-		p.set(pn);
 		pp.set(p);
+		p.set(pn);
 	}
 	
 	public static float distance(Particle x1, Particle x2) {
@@ -60,8 +70,8 @@ public class Particle {
 		return (float)Math.sqrt(dx*dx + dy*dy);
 	}
 	public static PointF unit(Particle x1, Particle x2) {
-		float dx = x1.p.x - x2.p.x;
-		float dy = x1.p.y - x2.p.y;
+		float dx = x2.p.x - x1.p.x;
+		float dy = x2.p.y - x1.p.y;
 		float d = (float)Math.sqrt(dx*dx + dy*dy);
 		if(d < 0.5) d = 0.5f; // For the sake of numerical stability
 		return new PointF(dx/d, dy/d);
