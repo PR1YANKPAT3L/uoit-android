@@ -25,7 +25,7 @@ public class ForceSimulationController extends Thread {
 		return this;
 	}
 	public void run() {
-		for(int i=0; i < 1000; i++) {
+		for(int i=0; true; i++) {
 			if(this.isInterrupted()) break;
 			try {
 				this.world.step(1);
