@@ -35,7 +35,6 @@ public class ForceSimulationActivity extends Activity implements OnClickListener
         controller = new ForceSimulationController(v);
     }
 
-    @Override
     public void onClick(View v) {
     	if(v == quit) {
     		controller.interrupt();
@@ -47,7 +46,6 @@ public class ForceSimulationActivity extends Activity implements OnClickListener
     	}
     }
 
-	@Override
 	public boolean onTouch(View v, MotionEvent e) {
 		float x = e.getX();
 		float y = e.getY();
