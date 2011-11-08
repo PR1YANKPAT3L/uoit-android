@@ -6,6 +6,8 @@ import java.util.Vector;
 import android.graphics.PointF;
 
 public class Particle {
+	public static int ID = 0;
+	public int id;
 	public float m;   // mass
 	public float m_inverse; // 1/mass
 	public PointF p; // Current position
@@ -24,10 +26,7 @@ public class Particle {
 		this.m_inverse = 1/m;
 		this.r = r;
 		this.conn = new Vector<Spring>();
-	}
-	
-	public void set(PointF p) {
-		this.p.set(p);
+		this.id = (Particle.ID ++);
 	}
 	
 	/**
@@ -43,7 +42,8 @@ public class Particle {
 		PointF accel = new PointF(0, 0);
 		for(Spring s: conn)
 			Add(accel, s.forceOn(this));
-		Multiply(accel, this.m_inverse);
+		Multiply(accel, this.m_inverse * World.dt * World.dt);
+		Add(pn, accel);
 	}
 	
 	/**

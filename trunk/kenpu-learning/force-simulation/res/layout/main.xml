@@ -16,5 +16,12 @@
    		    android:layout_height="fill_parent">
    		</ca.uoit.kenpu.CanvasView>
    </LinearLayout>
-
+   
+   <Button android:id="@+id/quit"
+       android:layout_width="200px"
+       android:layout_height="wrap_content"
+       android:layout_marginTop="50px"
+       android:text="Exit">
+   </Button>
+   
 </LinearLayout>

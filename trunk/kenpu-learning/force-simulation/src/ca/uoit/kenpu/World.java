@@ -16,15 +16,19 @@ public class World {
 		size = new PointF(800, 600);
 		particles = new Vector<Particle>();
 		springs = new Vector<Spring>();
-		float k = 1;
+		float k = 10;
 		float l = size.y/n;
-		float r = 5;
+		float r = 15;
+		float m = 1.0f;
 		Particle[][] grid = new Particle[n][n];
 		for(int i=0; i < n; i++)
 			for(int j=0; j< n; j++) {
-				Particle p = new Particle(r, 1.0f, new PointF(size.x/n*i, size.y/n*j), new PointF(0,0));
+				float dx = (float)Math.random()*100;
+				if(i==0 || j==0 || i == n-1 || j == n-1)
+					dx = 0;
+				Particle p = new Particle(m, r, new PointF(size.x/n*i-dx, size.y/n*j+dx), new PointF(0,0));
 				particles.add(grid[i][j] = p);
-				if(i==0 || j==0)
+				if(i==0 || j==0 || i == n-1 || j == n-1)
 					p.fixed = true;
 			}
 		for(int i=0; i < n-1; i++)
@@ -37,8 +41,9 @@ public class World {
 				springs.add(s1);
 				springs.add(s2);
 			}
-		springs.add(new Spring(k,l).connect(grid[n-1][n-1], grid[n-1][n-2]));
-		springs.add(new Spring(k,l).connect(grid[n-1][n-1], grid[n-2][n-2]));
+		springs.add(new Spring(k, l).connect(grid[n-2][n-1], grid[n-1][n-1]));
+		springs.add(new Spring(k, l).connect(grid[n-1][n-2], grid[n-1][n-1]));
+
 	}
 	
 	public void step(int iteration) throws SimulationException {
