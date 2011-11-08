@@ -29,7 +29,7 @@ public class Spring {
 	 * Compute the current force (scalar) in the spring
 	 */
 	public void update() {
-		this.f = -(Particle.distance(x1, x2) - l0) * k;
+		this.f = (Particle.distance(x1, x2) - l0) * k;
 	}
 	
 	public PointF forceOn(Particle x) throws SimulationException {

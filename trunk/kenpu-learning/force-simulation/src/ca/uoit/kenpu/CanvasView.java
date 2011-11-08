@@ -32,7 +32,7 @@ public class CanvasView extends View {
 	
 	public void setWorld(World w) {
 		this.world = w;
-		for(Particle x: w.particles) {
+		for(Particle x: w.particles()) {
 			ShapeDrawable y = new ShapeDrawable(new OvalShape());
 			y.getPaint().set(particlePaint);
 			particles.put(x.id, moveShapeDrawable(y, x));
@@ -49,7 +49,7 @@ public class CanvasView extends View {
 	 */
 	@Override
 	protected void onDraw(Canvas c) {
-		clear(c).drawWorld(c);
+		if(world != null) clear(c).drawWorld(c);
 	}
 	
 	/**
@@ -68,10 +68,10 @@ public class CanvasView extends View {
 	 * @return
 	 */
 	private CanvasView drawWorld(Canvas c) {
-		for(Particle x : world.particles) {
+		for(Particle x : world.particles()) {
 			moveShapeDrawable(particles.get(x.id), x).draw(c);
 		}
-		for(Spring s : world.springs) {
+		for(Spring s : world.springs()) {
 			c.drawLine(s.x1.p.x, s.x1.p.y, s.x2.p.x, s.x2.p.y, springPaint);
 		}
 		return this;

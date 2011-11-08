@@ -17,11 +17,32 @@
    		</ca.uoit.kenpu.CanvasView>
    </LinearLayout>
    
-   <Button android:id="@+id/quit"
-       android:layout_width="200px"
+   <LinearLayout
+       android:orientation="horizontal"
+       android:gravity="center"
+       android:layout_width="fill_parent"
        android:layout_height="wrap_content"
-       android:layout_marginTop="50px"
-       android:text="Exit">
-   </Button>
+       android:layout_marginTop="50px">
+	   <Button android:id="@+id/orbit"
+	       android:layout_width="200px"
+	       android:layout_height="wrap_content"
+	       android:text="Orbit">
+	   </Button>
+       <Button android:id="@+id/vine"
+	       android:layout_width="200px"
+	       android:layout_height="wrap_content"
+	       android:text="Vine">
+	   </Button>
+	   <Button android:id="@+id/grid"
+	       android:layout_width="200px"
+	       android:layout_height="wrap_content"
+	       android:text="Grid">
+	   </Button>    		    
+	   <Button android:id="@+id/quit"
+	       android:layout_width="200px"
+	       android:layout_height="wrap_content"
+	       android:text="Exit">
+	   </Button>
+   </LinearLayout>
    
 </LinearLayout>
