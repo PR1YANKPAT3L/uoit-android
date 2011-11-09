@@ -35,15 +35,16 @@ public class Particle {
 		this(m, r, new PointF(0,0), new PointF(0,0));
 	}
 	
-	public void set(float x, float y) {
+	public Particle set(float x, float y) {
 		this.p.set(x, y);
+		return this;
 	}
 	
 	/**
 	 * Uses Verlet integral
 	 * pn = 2*p - pp + a*dt*dt
 	 */
-	public void next() throws SimulationException {
+	public void next() {
 		pn.set(p);
 		if(this.fixed || this.hold)
 			return;

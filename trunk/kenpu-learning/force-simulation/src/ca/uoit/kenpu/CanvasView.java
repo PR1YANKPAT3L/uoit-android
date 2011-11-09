@@ -32,6 +32,7 @@ public class CanvasView extends View {
 	
 	public void setWorld(World w) {
 		this.world = w;
+		particles.clear();
 		for(Particle x: w.particles()) {
 			ShapeDrawable y = new ShapeDrawable(new OvalShape());
 			y.getPaint().set(particlePaint);

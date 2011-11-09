@@ -9,11 +9,9 @@ public class World_Orbit extends World {
 		
 	public List<Particle> P;
 	public List<Spring> S;
-	public PointF size;
 	
 	public World_Orbit() {
 		int n = 10;
-		size = new PointF(800, 600);
 		P = new Vector<Particle>();
 		S = new Vector<Spring>();
 		float k = 10;

@@ -32,9 +32,9 @@ public class Spring {
 		this.f = (Particle.distance(x1, x2) - l0) * k;
 	}
 	
-	public PointF forceOn(Particle x) throws SimulationException {
+	public PointF forceOn(Particle x) {
 		if(x != x1 && x != x2) {
-			throw new SimulationException("Spring not connected exception");
+			return new PointF(0,0);
 		}
 		PointF F = (x == x1) ? (Particle.unit(x1, x2)) : (Particle.unit(x2, x1));
 		Particle.Multiply(F, f);
