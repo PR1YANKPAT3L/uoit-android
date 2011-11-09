@@ -39,11 +39,13 @@ public class ForceSimulationActivity extends Activity implements OnClickListener
     	if(v == quit) {
     		controller.interrupt();
     		this.finish();
+    		return;
     	} else if(v == orbit) {
     		controller.setWorld(new World_Orbit());
-    		if(!controller.isAlive())
-    			controller.start();
+    	} else if(v == grid) {
+    		controller.setWorld(new World_Grid());
     	}
+		if(!controller.isAlive()) controller.start();
     }
 
 	public boolean onTouch(View v, MotionEvent e) {

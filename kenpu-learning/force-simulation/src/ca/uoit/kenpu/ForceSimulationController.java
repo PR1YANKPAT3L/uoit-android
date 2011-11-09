@@ -8,7 +8,7 @@ import android.util.Log;
  * Model and controller
  */
 public class ForceSimulationController extends Thread {
-	public  static float dt = 0.01f;
+	public  static float dt = 0.1f;
 
 	private static final String TAG = "Controller";
 	private static long delay = 20;
@@ -30,8 +30,6 @@ public class ForceSimulationController extends Thread {
 			try {
 				this.world.step(1);
 				Thread.sleep(delay);
-			} catch(SimulationException e) {
-				Log.e(TAG, "Error: " + e);
 			} catch(InterruptedException e) {
 				break;
 			}
@@ -60,6 +58,8 @@ public class ForceSimulationController extends Thread {
 	public void moveParticle(float x, float y) {
 		if(this.heldParticle != null)
 			this.heldParticle.set(x, y);
+		else
+			holdParticle(x, y);
 	}
 	
 	/**

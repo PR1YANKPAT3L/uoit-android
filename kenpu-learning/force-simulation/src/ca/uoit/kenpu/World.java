@@ -2,10 +2,13 @@ package ca.uoit.kenpu;
 
 import java.util.List;
 
+import android.graphics.PointF;
+
 public abstract class World {
 	public abstract List<Particle> particles();
 	public abstract List<Spring> springs();
-	public void step(int iteration) throws SimulationException {
+	public PointF size = new PointF(800, 600);
+	public void step(int iteration) {
 		for(int i=0; i < iteration; i++) {
 			// Compute the new positions
 			for(Particle x : particles()) x.next();
